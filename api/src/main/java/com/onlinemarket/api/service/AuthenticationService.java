@@ -5,6 +5,8 @@ import com.onlinemarket.api.model.AuthenticationResponse;
 import com.onlinemarket.api.model.Role;
 import com.onlinemarket.api.repository.UserRepository;
 
+import java.util.Optional;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +34,7 @@ public class AuthenticationService {
     userRepository.save(user);
 
     String token = jwtService.generateToken(user);
-    return new AuthenticationResponse(token,user.getUsername(),user.getRole(),user.getId());
+    return new AuthenticationResponse(token);
   }
 
   public AuthenticationResponse authenticate(User request) {
@@ -40,7 +42,12 @@ public class AuthenticationService {
 
     User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
     String token = jwtService.generateToken(user);
-    return new AuthenticationResponse(token,user.getUsername(),user.getRole(),user.getId());
+    return new AuthenticationResponse(token);
+  }
+
+  public Optional<User> getUser(String id) {
+    Optional<User> user = userRepository.findById(id);
+    return user;
   }
 
 }
