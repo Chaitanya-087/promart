@@ -9,11 +9,11 @@ import { Injectable } from '@angular/core';
 export class RouteGuard {
   constructor(private auth: AuthService, private router: Router) { }
   canActivate(): Boolean | Observable<Boolean | UrlTree> {
-    this.auth.isValid.subscribe(res => {
+    this.auth.isLoggedIn.subscribe(res => {
       if (!res) {
         this.router.navigate(['/login']);
       }
     });
-    return this.auth.isValid;
+    return this.auth.isLoggedIn;
   }
 }

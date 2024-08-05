@@ -1,20 +1,33 @@
+import { Role, User } from '../_models';
 import { AuthService } from './../_services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  username:string = "Anonymous";
-
-  constructor(public authService:AuthService) {}
+export class HomeComponent implements OnInit {
+  user: User = {
+    id: "",
+    username: "Anonymous",
+    role: Role.VIEWER
+  };
+  
+  constructor(private authService:AuthService) {}
 
   ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser(): void {
     this.authService.user.subscribe((user) => {
-      this.username = user.username;
-    })
+      this.user = user;
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 }

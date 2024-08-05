@@ -19,13 +19,13 @@ export class JwtInterceptor implements HttpInterceptor {
     if (isPublicUrl) {
       return next.handle(request);
     }
-    if (!this.authService.isValid) {
+    if (!this.authService.isLoggedIn) {
       return EMPTY;
     }
 
     const jwtRequest = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.authService.token}`,
+        Authorization: `Bearer ${this.authService.token.trim()}`,
       },
     });
 
