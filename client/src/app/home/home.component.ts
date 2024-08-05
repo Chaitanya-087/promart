@@ -7,7 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  username:string = "Anonymous";
+
   constructor(public authService:AuthService) {}
 
+  ngOnInit(): void {
+    this.authService.user.subscribe((user) => {
+      this.username = user.username;
+    })
+  }
 
 }

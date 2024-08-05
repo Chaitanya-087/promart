@@ -5,8 +5,8 @@ spring:
         name: api
     datasource:
         url: jdbc:postgresql://localhost:5432/promart
-        username: postgres
-        password: root
+        username: chaitanya
+        password: chaitanya
     jpa:
         properties:
             hibernate:
