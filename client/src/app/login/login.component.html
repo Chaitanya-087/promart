@@ -1,3 +1,70 @@
+<section class="auth">
+  <div class='wrapper'>
+    <button class='back-btn' title="back to home" (click)="back()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </button>
+    <div class='auth-body'>
+      <form class='auth-form' (submit)="login()">
+        <h3 class='auth-title'>Welcome back</h3>
+        <p class='auth-desc'>Welcome back! Please enter your details</p>
+        <div class='input-group'>
+          <label htmlFor='username' class='label'>
+            Username
+          </label>
+          <div class='input-container' data-error='enter valid email'>
+            <input type='text' name='username' [(ngModel)]="form.username" required placeholder="Enter username"
+              autocomplete="username" id="username" />
+          </div>
+        </div>
+        <!-- <div class='input-group'>
+                <label htmlFor='email' class='label'>
+                    Email
+                </label>
+                <div class='input-container' data-error='enter valid email'>
+                    <input
+                        type='email'
+                        name='email'
+                        required
+                        [(ngModel)]="form.email"
+                    />
+                </div>
+            </div> -->
+        <div class='input-group'>
+          <label htmlFor='password' class='label'>
+            Password
+          </label>
+          <div class='input-container'>
+            <input type='password' name='password' [(ngModel)]="form.password" placeholder='Enter password' required
+              min='6' />
+            <!-- {!showPassword ? (
+                        <VisibilityOffIcon class='pwd-icon' onClick={toggleShowPassword} />
+                    ) : (
+                        <VisibilityIcon class='pwd-icon' onClick={toggleShowPassword} />
+                    )} -->
+          </div>
+        </div>
+        <button class='auth-btn' type='submit'>
+          <div *ngIf="isLoading" class="loader-background">
+            <ngx-ui-loader  fgsType="three-bounce" bgsPosition="center-center" [bgsSize]="10" fgsColor="white"></ngx-ui-loader>
+          </div>
+          Login
+        </button>
+        <span class='message'>
+          Don't have an account?
+          <a routerLink="/signup" class='link-to'>
+            Sign up
+          </a>
+        </span>
+      </form>
+    </div>
+    <div class='banner'>
+      <div class='circle'>
+      </div>
+      <div class='overlay'></div>
+    </div>
+  </div>
+</section>
+<!-- 
 <p>login works!</p>
 <form method="post" (submit)="login()">
   <label for="username">username</label>
@@ -19,4 +86,4 @@
   <button type="submit">Login</button>
 </form>
 <p>not account</p>
-<a routerLink="/signup">signup</a>
+<a routerLink="/signup">signup</a> -->

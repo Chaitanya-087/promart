@@ -11,6 +11,8 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxSpinnerModule,
+    NgxUiLoaderModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
