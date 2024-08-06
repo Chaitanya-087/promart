@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   user: User = {
     id: "",
     username: "Anonymous",
+    email: "",
     role: Role.VIEWER
   };
   

@@ -27,6 +27,7 @@ public class DataInitializer implements ApplicationRunner {
             user.setUsername("admin");
             user.setPassword(passwordEncoder.encode("admin"));
             user.setRole(Role.ADMIN);
+            user.setEmail("sparkscj234@gmail.com");
             userRepository.save(user);
         }
     }

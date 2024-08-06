@@ -1,4 +1,4 @@
-package com.onlinemarket.api.configuration;
+package com.onlinemarket.api.handler;
 
 import java.io.IOException;
 

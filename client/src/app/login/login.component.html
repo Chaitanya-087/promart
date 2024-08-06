@@ -4,43 +4,32 @@
       <fa-icon [icon]="faArrowLeft"></fa-icon>
     </button>
     <div class='auth-body'>
-      <form class='auth-form' (submit)="login()">
-        <h3 class='auth-title'>Welcome back</h3>
-        <p class='auth-desc'>Welcome back! Please enter your details</p>
+      <form class='auth-form' #form="ngForm" (ngSubmit)="login(form.value)">
+        <h3 class='auth-title'>Welcome back to Promart!</h3>
+        <p class='auth-desc'>Please signin to continue shopping</p>
+        <div *ngIf="errorMessage" class="error">
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+          <p>{{errorMessage}}</p>
+          <button class="remove-btn">
+            <fa-icon [icon]="faXmark" (click)="removeError()"></fa-icon>
+          </button>
+        </div>
         <div class='input-group'>
           <label htmlFor='username' class='label'>
             Username
           </label>
           <div class='input-container' data-error='enter valid email'>
-            <input type='text' name='username' [(ngModel)]="form.username" required placeholder="Enter username"
-              autocomplete="username" id="username" />
+            <input type='text' name='username' ngModel required placeholder="Enter username or email"
+              />
           </div>
         </div>
-        <!-- <div class='input-group'>
-                <label htmlFor='email' class='label'>
-                    Email
-                </label>
-                <div class='input-container' data-error='enter valid email'>
-                    <input
-                        type='email'
-                        name='email'
-                        required
-                        [(ngModel)]="form.email"
-                    />
-                </div>
-            </div> -->
         <div class='input-group'>
           <label htmlFor='password' class='label'>
             Password
           </label>
           <div class='input-container'>
-            <input type='password' name='password' [(ngModel)]="form.password" placeholder='Enter password' required
-              min='6' />
-            <!-- {!showPassword ? (
-                        <VisibilityOffIcon class='pwd-icon' onClick={toggleShowPassword} />
-                    ) : (
-                        <VisibilityIcon class='pwd-icon' onClick={toggleShowPassword} />
-                    )} -->
+            <input type='password' name='password' ngModel placeholder='Enter password' required
+              min='6'  />
           </div>
         </div>
         <button class='auth-btn' type='submit'>
@@ -56,6 +45,9 @@
           </a>
         </span>
       </form>
+      <footer class="footer">
+        <p>© 2024 Promart Supermarket. All rights reserved.</p>
+    </footer>
     </div>
     <div class='banner'>
       <div class='circle'>
@@ -64,26 +56,3 @@
     </div>
   </div>
 </section>
-<!-- 
-<p>login works!</p>
-<form method="post" (submit)="login()">
-  <label for="username">username</label>
-  <input
-    type="text"
-    placeholder="username"
-    name="username"
-    [(ngModel)]="form.username"
-    required
-  />
-  <label for="password">password</label>
-  <input
-    type="password"
-    placeholder="password"
-    name="password"
-    [(ngModel)]="form.password"
-    required
-  />
-  <button type="submit">Login</button>
-</form>
-<p>not account</p>
-<a routerLink="/signup">signup</a> -->

@@ -1,6 +1,7 @@
 package com.onlinemarket.api.configuration;
 
 import com.onlinemarket.api.filter.JwtAuthenticationFilter;
+import com.onlinemarket.api.handler.CustomAccessDeniedHandler;
 import com.onlinemarket.api.service.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

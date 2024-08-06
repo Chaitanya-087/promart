@@ -1,44 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { AuthService } from '../_services/auth.service';
-import { LoginForm } from '../_models';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { catchError, of, tap, throwError } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
+import { AuthService } from "../_services/auth.service";
+import { LoginForm } from "../_models";
+import { faArrowLeft,faExclamationTriangle,faXmark } from "@fortawesome/free-solid-svg-icons";
+import { NgxUiLoaderService } from "ngx-ui-loader";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
-export class LoginComponent{
-  faArrowLeft = faArrowLeft
-  isLoading:boolean = false;
-  form: LoginForm={
-    username: "",
-    password: "",
-  };
-  constructor(private authService: AuthService,private location: Location, private ngxService: NgxUiLoaderService) { }
-  showLoader(): void {
+export class LoginComponent {
+  faArrowLeft = faArrowLeft;
+  faExclamationTriangle = faExclamationTriangle;
+  faXmark = faXmark;
+  isLoading: boolean = false;
+  errorMessage: string = "";
+  constructor(
+    private authService: AuthService,
+    private location: Location,
+    private ngxService: NgxUiLoaderService
+  ) {}
+
+  private showLoader(): void {
     this.isLoading = true;
     this.ngxService.start();
   }
 
-  hideLoader(): void {
+  private hideLoader(): void {
     this.isLoading = false;
     this.ngxService.stop();
   }
-  login() {
-    this.showLoader()
-    this.authService.login(this.form).subscribe(
-      (_) => {
-        this.hideLoader()
-      }
-    );
-    this.form.username='';
-    this.form.password='';
+
+  login(form: LoginForm) {
+    if (!form.username || !form.password) {
+      this.errorMessage = "Username and password are required";
+      return;
+    }
+    this.showLoader();
+    this.authService.login(form).pipe(catchError((e) =>{
+      this.errorMessage = e.error.message;
+      this.hideLoader();
+      return of(null);
+    })).subscribe((_) => {
+      this.hideLoader();
+    });
   }
 
   back() {
     this.location.back();
+  }
+
+  removeError() {
+    this.errorMessage = "";
   }
 }

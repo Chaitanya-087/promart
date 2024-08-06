@@ -4,6 +4,7 @@ import { environment } from "src/environments/environment";
 import { BehaviorSubject, map, Observable, tap, catchError, of } from "rxjs";
 import { User, LoginForm, AuthResponse, Role } from "../_models";
 import { Router } from "@angular/router";
+import { SignupForm } from "../_models/SignupFom";
 
 @Injectable({
   providedIn: "root",
@@ -16,20 +17,12 @@ export class AuthService {
   login(form: LoginForm): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${environment.authUrl}/login`, form).pipe(
       tap((res) => this.saveSession(res)),
-      catchError((error) => {
-        console.error('Login error', error);
-        return of({token: ""});
-      })
     );
   }
 
-  register(form: LoginForm): Observable<AuthResponse> {
+  register(form: SignupForm): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${environment.authUrl}/register`, form).pipe(
       tap((res) => this.saveSession(res)),
-      catchError((error) => {
-        console.error('Registration error', error);
-        return of({token: ""});
-      })
     );
   }
 
@@ -51,7 +44,7 @@ export class AuthService {
       map((user) => ({ ...user, role: this.role })),
       catchError((error) => {
         console.error('Fetch user error', error);
-        return of({ id: "", username: "Anonymous", role: Role.VIEWER });
+        return of({ id: "", username: "Anonymous",email: "", role: Role.VIEWER });
       })
     );
   }
