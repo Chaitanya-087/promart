@@ -17,6 +17,8 @@ export class LoginComponent {
 
   login() {
     this.authService.login(this.form).subscribe();
+    this.form.username='';
+    this.form.password='';
   }
 
   back() {
