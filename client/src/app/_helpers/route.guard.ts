@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
-})
+})//mg
 export class RouteGuard {
   constructor(private auth: AuthService, private router: Router) { }
   canActivate(): Boolean | Observable<Boolean | UrlTree> {

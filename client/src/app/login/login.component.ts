@@ -34,10 +34,6 @@ export class LoginComponent {
   }
 
   login(form: LoginForm) {
-    if (!form.username || !form.password) {
-      this.errorMessage = "Username and password are required";
-      return;
-    }
     this.showLoader();
     this.authService.login(form).pipe(catchError((e) =>{
       this.errorMessage = e.error.message;

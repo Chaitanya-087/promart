@@ -25,10 +25,6 @@ export class SignupComponent {
   ) {}
 
   register(form: SignupForm) {
-    if (!form.username || !form.email || !form.password) {
-      this.errorMessage = "All fields are required";
-      return;
-    }
     this.showLoader();
     this.authService.register(form).pipe(catchError((e) => {
       this.errorMessage = e.error.message;

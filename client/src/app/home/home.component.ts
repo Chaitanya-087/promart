@@ -1,4 +1,4 @@
-import { Role, User } from '../_models';
+import { User,Role } from '../_models';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
