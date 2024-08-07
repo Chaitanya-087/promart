@@ -45,6 +45,8 @@ export class LoginComponent {
       return of(null);
     })).subscribe((_) => {
       this.hideLoader();
+      form.username = "";
+      form.password = "";
     });
   }
 
