@@ -1,11 +1,10 @@
-package com.onlinemarket.api.model;
+package com.onlinemarket.api.binding;
 
 import lombok.Data;
 
 @Data
-public class SignupBody {
+public class LoginRequest {
 
     private String username;
-    private String email;
     private String password;
 }

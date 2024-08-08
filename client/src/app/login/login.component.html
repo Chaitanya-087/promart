@@ -1,58 +1,64 @@
-<section class="auth">
-  <div class='wrapper'>
-    <button class='back-btn' title="back to home" (click)="back()">
-      <fa-icon [icon]="faArrowLeft"></fa-icon>
+<form class="auth-form" #form="ngForm" (ngSubmit)="login(form.value)">
+  
+  <h3 class="auth-title">Welcome back to Promart!</h3>
+  <p class="auth-desc">Please signin to continue shopping</p>
+
+  <div *ngIf="errorMessage" class="error">
+    <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+    <p>{{errorMessage}}</p>
+    <button class="remove-btn">
+      <fa-icon [icon]="faXmark" (click)="removeError()"></fa-icon>
     </button>
-    <div class='auth-body'>
-      <form class='auth-form' #form="ngForm" (ngSubmit)="login(form.value)">
-        <h3 class='auth-title'>Welcome back to Promart!</h3>
-        <p class='auth-desc'>Please signin to continue shopping</p>
-        <div *ngIf="errorMessage" class="error">
-          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
-          <p>{{errorMessage}}</p>
-          <button class="remove-btn">
-            <fa-icon [icon]="faXmark" (click)="removeError()"></fa-icon>
-          </button>
-        </div>
-        <div class='input-group'>
-          <label htmlFor='username' class='label'>
-            Username
-          </label>
-          <div class='input-container' data-error='enter valid email'>
-            <input type='text' name='username' ngModel required placeholder="Enter username or email"
-              />
-          </div>
-        </div>
-        <div class='input-group'>
-          <label htmlFor='password' class='label'>
-            Password
-          </label>
-          <div class='input-container'>
-            <input type='password' name='password' ngModel placeholder='Enter password' required
-              min='6'  />
-          </div>
-        </div>
-        <button class='auth-btn' type='submit'>
-          <div *ngIf="isLoading" class="loader-background">
-            <ngx-ui-loader  fgsType="three-bounce" bgsPosition="center-center" [bgsSize]="10" fgsColor="white"></ngx-ui-loader>
-          </div>
-          Login
-        </button>
-        <span class='message'>
-          Don't have an account?
-          <a routerLink="/signup" class='link-to'>
-            Sign up
-          </a>
-        </span>
-      </form>
-      <footer class="footer">
-        <p>© 2024 Promart Supermarket. All rights reserved.</p>
-    </footer>
-    </div>
-    <div class='banner'>
-      <div class='circle'>
-      </div>
-      <div class='overlay'></div>
+  </div>
+
+  <div class="input-group">
+    <label htmlFor="username" class="label">
+      Username
+    </label>
+    <div class="input-container" data-error="enter valid email">
+      <input
+        type="text"
+        name="username"
+        ngModel
+        required
+        placeholder="Enter username or email"
+      />
     </div>
   </div>
-</section>
+
+  <div class="input-group">
+    <label htmlFor="password" class="label">
+      Password
+    </label>
+    <div class="input-container">
+      <input
+        type="password"
+        name="password"
+        ngModel
+        placeholder="Enter password"
+        required
+        min="6"
+      />
+    </div>
+  </div>
+
+  <button class="auth-btn" type="submit">
+    <div *ngIf="isLoading" class="loader-background">
+      <ngx-ui-loader
+        fgsType="three-bounce"
+        bgsPosition="center-center"
+        [bgsSize]="10"
+        fgsColor="white"
+      ></ngx-ui-loader>
+    </div>
+    Login
+  </button>
+
+  <span class="message">
+    Don't have an account?
+    <a routerLink="/signup" class="link-to">
+      Sign up
+    </a>
+  </span>
+
+</form>

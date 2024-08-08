@@ -5,8 +5,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.onlinemarket.api.entity.Role;
 import com.onlinemarket.api.entity.User;
-import com.onlinemarket.api.model.Role;
 import com.onlinemarket.api.repository.UserRepository;
 
 @Component

@@ -7,12 +7,14 @@
         "fortawesome",
         "Jwts",
         "onlinemarket",
+        "Playwrite",
         "PUBLICUSER",
         "Servlet",
         "Signin",
         "springframework",
         "userdetails",
-        "Xmark"
+        "Xmark",
+        "fontawesome",
     ],
     "java.configuration.updateBuildConfiguration": "automatic"
     

@@ -1,10 +1,10 @@
 package com.onlinemarket.api.controller;
 
+import com.onlinemarket.api.binding.LoginRequest;
+import com.onlinemarket.api.binding.SignupRequest;
+import com.onlinemarket.api.dto.AuthenticationDTO;
 import com.onlinemarket.api.dto.UserDTO;
 import com.onlinemarket.api.entity.User;
-import com.onlinemarket.api.model.AuthenticationResponse;
-import com.onlinemarket.api.model.LoginBody;
-import com.onlinemarket.api.model.SignupBody;
 import com.onlinemarket.api.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,15 +25,15 @@ public class AuthenticationController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<AuthenticationResponse> register(
-    @RequestBody SignupBody request
+  public ResponseEntity<AuthenticationDTO> register(
+    @RequestBody SignupRequest request
   ) {
     return ResponseEntity.ok(authService.register(request));
   }
 
   @PostMapping("/login")
-  public ResponseEntity<AuthenticationResponse> login(
-    @RequestBody LoginBody request
+  public ResponseEntity<AuthenticationDTO> login(
+    @RequestBody LoginRequest request
   ) {
     return ResponseEntity.ok(authService.authenticate(request));
   }

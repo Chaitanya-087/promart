@@ -8,40 +8,40 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.onlinemarket.api.model.ErrorResponse;
+import com.onlinemarket.api.dto.ErrorDTO;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(IllegalArgumentException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ResponseEntity<ErrorResponse> handleIllegalArgumentException(
+  public ResponseEntity<ErrorDTO> handleIllegalArgumentException(
     IllegalArgumentException e
   ) {
-    return new ResponseEntity<ErrorResponse>(
-      ErrorResponse.builder().status(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build(),
+    return new ResponseEntity<ErrorDTO>(
+      ErrorDTO.builder().status(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build(),
       HttpStatus.BAD_REQUEST
     );
   }
 
   @ExceptionHandler(BadCredentialsException.class)
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  public ResponseEntity<ErrorResponse> handleBadCredentialsException(
+  public ResponseEntity<ErrorDTO> handleBadCredentialsException(
     BadCredentialsException e
   ) {
-    return new ResponseEntity<ErrorResponse>(
-        ErrorResponse.builder().status(HttpStatus.UNAUTHORIZED.value()).message(e.getMessage()).build(),
+    return new ResponseEntity<ErrorDTO>(
+        ErrorDTO.builder().status(HttpStatus.UNAUTHORIZED.value()).message(e.getMessage()).build(),
         HttpStatus.UNAUTHORIZED
     );
   }
 
   @ExceptionHandler(UsernameNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public ResponseEntity<ErrorResponse> handleUsernameNotFoundException(
+  public ResponseEntity<ErrorDTO> handleUsernameNotFoundException(
     UsernameNotFoundException e
   ) {
-    return new ResponseEntity<ErrorResponse>(
-        ErrorResponse.builder().status(HttpStatus.NOT_FOUND.value()).message(e.getMessage()).build(),
+    return new ResponseEntity<ErrorDTO>(
+        ErrorDTO.builder().status(HttpStatus.NOT_FOUND.value()).message(e.getMessage()).build(),
         HttpStatus.NOT_FOUND
     );
   }

@@ -1,10 +1,10 @@
 package com.onlinemarket.api.service;
 
+import com.onlinemarket.api.binding.LoginRequest;
+import com.onlinemarket.api.binding.SignupRequest;
+import com.onlinemarket.api.dto.AuthenticationDTO;
+import com.onlinemarket.api.entity.Role;
 import com.onlinemarket.api.entity.User;
-import com.onlinemarket.api.model.AuthenticationResponse;
-import com.onlinemarket.api.model.LoginBody;
-import com.onlinemarket.api.model.Role;
-import com.onlinemarket.api.model.SignupBody;
 import com.onlinemarket.api.repository.UserRepository;
 import java.util.Optional;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,7 +35,7 @@ public class AuthenticationService {
     this.authenticationManager = authenticationManager;
   }
 
-  public AuthenticationResponse register(SignupBody request) {
+  public AuthenticationDTO register(SignupRequest request) {
     if (
       userRepository.existsByUsername(request.getUsername()) ||
       userRepository.existsByEmail(request.getEmail())
@@ -52,10 +52,10 @@ public class AuthenticationService {
     userRepository.save(user);
 
     String token = jwtService.generateToken(user);
-    return new AuthenticationResponse(token);
+    return new AuthenticationDTO(token);
   }
 
-  public AuthenticationResponse authenticate(LoginBody request) {
+  public AuthenticationDTO authenticate(LoginRequest request) {
     String username = request.getUsername();
     Optional<User> userOpt = userRepository.findByUsername(username);
 
@@ -78,7 +78,7 @@ public class AuthenticationService {
 
     User user = userOpt.get();
     String token = jwtService.generateToken(user);
-    return new AuthenticationResponse(token);
+    return new AuthenticationDTO(token);
   }
 
   public User getUser(String id) {

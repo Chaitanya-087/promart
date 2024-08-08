@@ -1,7 +1,5 @@
 package com.onlinemarket.api.entity;
 
-import com.onlinemarket.api.model.Role;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

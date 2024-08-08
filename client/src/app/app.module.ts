@@ -11,15 +11,19 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NavbarComponent } from "./navbar/navbar.component";
+import { HasRoleDirective } from './_helpers';
+import { BaseTemplateComponent } from './base-template/base-template.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AuthTemplateComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NavbarComponent,
+    BaseTemplateComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +31,9 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
-    NgxSpinnerModule,
-    NgxUiLoaderModule
-  ],
+    NgxUiLoaderModule,
+    HasRoleDirective,
+],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

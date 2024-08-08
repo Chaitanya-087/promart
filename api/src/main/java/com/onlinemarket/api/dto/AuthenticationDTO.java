@@ -1,4 +1,4 @@
-package com.onlinemarket.api.model;
+package com.onlinemarket.api.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationDTO {
     private String token;
 }

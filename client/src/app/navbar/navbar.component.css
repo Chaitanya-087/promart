@@ -1,0 +1,118 @@
+.wrapper {
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 90%;
+  margin: auto;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  color: rgb(46, 46, 46);
+}
+
+.border {
+  border: 1px solid #e7e7e7;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.logo-wrapper {
+  width: 120px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar {
+  width: 35px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5e3db3;
+  position: relative;
+}
+.cart-icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: rgb(46, 46, 46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.chip {
+  --size: 15px;
+  position: absolute;
+  left: 80%;
+  bottom: 5%;
+  background-color: white;
+  border: 1px solid #e7e7e7;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(46, 46, 46);
+  font-weight: 700;
+  font-size: small;
+}
+
+.username {
+  font-weight: 600;
+  color: white;
+}
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.active {
+  color: #007bff;
+}

@@ -1,4 +1,4 @@
-package com.onlinemarket.api.model;
+package com.onlinemarket.api.entity;
 
 public enum Role {
     USER, ADMIN
