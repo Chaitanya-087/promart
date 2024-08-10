@@ -3,19 +3,18 @@ package com.onlinemarket.api.service;
 import com.onlinemarket.api.entity.User;
 import com.onlinemarket.api.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+@RequiredArgsConstructor
+public class CustomUserDetailService implements UserDetailsService {
 
   private final UserRepository userRepository;
-
-  UserDetailServiceImpl(UserRepository userRepository){
-    this.userRepository = userRepository;
-  }
 
   @Override
   public UserDetails loadUserByUsername(String username)

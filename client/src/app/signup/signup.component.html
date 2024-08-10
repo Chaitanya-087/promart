@@ -11,39 +11,40 @@
     </button>
   </div>
 
-  <div class="input-group">
+  <div class="input-group" [class.has-error]="username.invalid && (username.touched || username.dirty)" [attr.data-error]="username.errors?.['required'] && 'username is required'">
     <label htmlFor="username" class="label">
       Username
     </label>
-    <div class="input-container" data-error="enter valid email">
+    <div class="input-container" data-error="username is required">
       <input
         type="text"
         name="username"
         ngModel
         required
+        #username="ngModel"
         placeholder="What should we call you?"
       />
     </div>
   </div>
 
-  <div class="input-group">
-    <label htmlFor="email" class="label">
+  <div class="input-group" [class.has-error]="email.invalid && (email.touched || email.dirty)" [attr.data-error]="email.errors?.['required'] || email.errors?.['pattern'] && 'email is required and valid'">
+    <label htmlFor="email" class="label" >
       Email
     </label>
-    <div class="input-container" data-error="enter valid email">
+    <div class="input-container" >
       <input
         type="email"
         name="email"
+        #email="ngModel"
         ngModel
         required
-        pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g"
         placeholder="Enter email"
         id="email"
       />
     </div>
   </div>
 
-  <div class="input-group">
+  <div class="input-group" [class.has-error]="password.invalid && (password.touched || password.dirty)" [attr.data-error]="password.errors?.['required'] && 'password is required'">
     <label htmlFor="password" class="label">
       Password
     </label>
@@ -51,10 +52,10 @@
       <input
         type="password"
         name="password"
+        #password="ngModel"
         ngModel
-        placeholder="Enter password"
         required
-        min="6"
+        placeholder="Enter password"
       />
     </div>
   </div>

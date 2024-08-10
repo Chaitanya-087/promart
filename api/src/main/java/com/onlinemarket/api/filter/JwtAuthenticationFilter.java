@@ -1,7 +1,7 @@
 package com.onlinemarket.api.filter;
 
 import com.onlinemarket.api.service.JwtService;
-import com.onlinemarket.api.service.UserDetailServiceImpl;
+import com.onlinemarket.api.service.CustomUserDetailService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,9 +20,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
-  private final UserDetailServiceImpl userDetailsService;
+  private final CustomUserDetailService userDetailsService;
 
-  public JwtAuthenticationFilter(JwtService jwtService, UserDetailServiceImpl userDetailsService) {
+  public JwtAuthenticationFilter(JwtService jwtService, CustomUserDetailService userDetailsService) {
     this.jwtService = jwtService;
     this.userDetailsService = userDetailsService;
   }

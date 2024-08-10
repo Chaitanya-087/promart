@@ -8,9 +8,6 @@ spring:
         username: chaitanya
         password: chaitanya
     jpa:
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.PostgreSQLDialect
         hibernate:
             ddl-auto: update
         show-sql: true
@@ -18,3 +15,10 @@ spring:
         jwt:
             secret: 28ce7324417bd2c4dd6f506941db222b5701e2927b8cfceac9d908a757f11254
             expiration: 86400000
+
+
+logging:
+    level:
+        org:
+            springframework:
+                security: DEBUG

@@ -2,7 +2,7 @@ package com.onlinemarket.api.configuration;
 
 import com.onlinemarket.api.filter.JwtAuthenticationFilter;
 import com.onlinemarket.api.handler.CustomAccessDeniedHandler;
-import com.onlinemarket.api.service.UserDetailServiceImpl;
+import com.onlinemarket.api.service.CustomUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -23,10 +23,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-  private final UserDetailServiceImpl userDetailService;
+  private final CustomUserDetailService userDetailService;
   private final JwtAuthenticationFilter jwtAuthenticationFilter;
   private final CustomAccessDeniedHandler customAccessDeniedHandler;
-  SecurityConfig(UserDetailServiceImpl userDetailService, JwtAuthenticationFilter jwtAuthenticationFilter, CustomAccessDeniedHandler customAccessDeniedHandler) {
+  SecurityConfig(CustomUserDetailService userDetailService, JwtAuthenticationFilter jwtAuthenticationFilter, CustomAccessDeniedHandler customAccessDeniedHandler) {
     this.userDetailService = userDetailService;
     this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     this.customAccessDeniedHandler = customAccessDeniedHandler;

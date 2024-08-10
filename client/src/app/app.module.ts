@@ -15,6 +15,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { HasRoleDirective } from './_helpers';
 import { BaseTemplateComponent } from './base-template/base-template.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { BaseTemplateComponent } from './base-template/base-template.component';
     FontAwesomeModule,
     NgxUiLoaderModule,
     HasRoleDirective,
+    BrowserAnimationsModule,
 ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

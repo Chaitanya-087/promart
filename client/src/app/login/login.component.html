@@ -11,33 +11,34 @@
     </button>
   </div>
 
-  <div class="input-group">
+  <div class="input-group" [class.has-error]="username.invalid && (username.touched || username.dirty)" [attr.data-error]="username.errors?.['required'] && 'username is required'" >
     <label htmlFor="username" class="label">
       Username
     </label>
-    <div class="input-container" data-error="enter valid email">
+    <div class="input-container" >
       <input
         type="text"
         name="username"
         ngModel
         required
+        #username="ngModel"
         placeholder="Enter username or email"
       />
     </div>
   </div>
 
-  <div class="input-group">
+  <div class="input-group" [class.has-error]="password.invalid && (password.touched || password.dirty)" [attr.data-error]="password.errors?.['required'] && 'password is required'" >
     <label htmlFor="password" class="label">
       Password
     </label>
-    <div class="input-container">
+    <div class="input-container" >
       <input
         type="password"
         name="password"
         ngModel
         placeholder="Enter password"
         required
-        min="6"
+        #password="ngModel"
       />
     </div>
   </div>

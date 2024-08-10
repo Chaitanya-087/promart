@@ -6,6 +6,9 @@ import com.onlinemarket.api.dto.AuthenticationDTO;
 import com.onlinemarket.api.entity.Role;
 import com.onlinemarket.api.entity.User;
 import com.onlinemarket.api.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
 import java.util.Optional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,24 +19,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationService {
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
-
-  public AuthenticationService(
-    UserRepository userRepository,
-    PasswordEncoder passwordEncoder,
-    JwtService jwtService,
-    AuthenticationManager authenticationManager
-  ) {
-    this.userRepository = userRepository;
-    this.passwordEncoder = passwordEncoder;
-    this.jwtService = jwtService;
-    this.authenticationManager = authenticationManager;
-  }
 
   public AuthenticationDTO register(SignupRequest request) {
     if (

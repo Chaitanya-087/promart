@@ -1,3 +1,17 @@
-<h1>
-    home component
-</h1>
+<section class="wrapper">
+  <div class="categories">
+    <button *ngFor="let category of this.categories" class="category" [class.active]="category.id===tabIndex" (click)="filter(category.id)" >
+      <span>{{category.name}}</span>
+    </button>
+  </div>
+  <div class="products">
+    <div *ngFor="let product of this.filteredProducts" class="product">
+      <img [src]="product.imageUrl" class="banner" [alt]="product.name" />
+      <div class="body">
+        <h3 class="name">{{product.name}}</h3>
+        <p class="desc">{{product.description}}</p>
+        <span class="price">{{product.price | currency}}</span>
+      </div>
+    </div>
+  </div>
+</section>

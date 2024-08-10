@@ -9,7 +9,7 @@ ngx-ui-loader {
 }
 
 .auth-form {
-  min-width: 300px;
+  min-width: 320px;
   max-width: 340px;
   width: 100%;
 }
@@ -54,18 +54,17 @@ ngx-ui-loader {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
-  margin-bottom: 1.125rem;
+  margin-bottom: 1.75rem;
+  position: relative;
 }
 
 .input-group > .label {
   color: hsl(212, 24%, 26%);
 }
 
-.input-group:has(:focus) > .label {
-  color: hsl(257, 49%, 47%);
-}
-
+.input-group:has(:focus) > .label,
 .input-group:has(:focus) > .input-container {
+  color: hsl(257, 49%, 47%);
   border-color: hsl(257, 49%, 47%);
 }
 
@@ -73,7 +72,6 @@ ngx-ui-loader {
   height: 45px;
   border-radius: 4px;
   border: 1px solid hsl(0, 0%, 90%);
-  position: relative;
   overflow: hidden;
 }
 
@@ -122,37 +120,34 @@ ngx-ui-loader {
   text-decoration: none;
 }
 
+/*form validation*/
+.input-group.has-error .input-container {
+  border-color: hsl(0, 100%, 50%);
+}
+
+.input-group.has-error .label {
+  color: hsl(0, 100%, 50%);
+}
+
+.input-group.has-error::after {
+  content: attr(data-error);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: hsl(0, 100%, 50%);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
 @media screen and (width <=768px) {
-  .auth > .wrapper {
-    grid-template-columns: 1fr;
-    grid-template-rows: 20% 1fr;
-  }
-
-  .auth-body {
-    align-items: flex-start;
-  }
-
   .auth-form {
     max-width: 100%;
   }
 
   .auth-title {
     text-align: center;
-  }
-
-  .circle {
-    width: 48px;
-  }
-
-  .back-btn {
-    top: 1rem;
-    left: 1rem;
-  }
-
-  .banner {
-    grid-column: 1;
-    grid-row: 1;
-    overflow: hidden;
-    background-color: white;
   }
 }

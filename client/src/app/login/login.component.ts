@@ -7,6 +7,13 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { NgxUiLoaderService } from "ngx-ui-loader";
+import {
+  animate,
+  state,
+  style,
+  trigger,
+  transition,
+} from "@angular/animations";
 
 @Component({
   selector: "app-login",
@@ -18,6 +25,7 @@ export class LoginComponent {
   faXmark = faXmark;
   isLoading: boolean = false;
   errorMessage: string = "";
+
   constructor(
     private authService: AuthService,
     private ngxService: NgxUiLoaderService
@@ -43,6 +51,7 @@ export class LoginComponent {
 
   removeError() {
     this.errorMessage = "";
+
   }
 
   private showLoader(): void {
