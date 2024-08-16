@@ -3,13 +3,13 @@
     <div class="logo-wrapper" routerLink="/home">
       <img src="assets/logo.png" alt="promart logo" class="logo" />
     </div>
-    <div *ngIf="authService.isLoggedIn; else authTemplate">
+    <div *ngIf="isLoggedIn; else authTemplate">
       <div class="flex">
         <!-- <div>orders</div> -->
         <div
           *hasRoles="[roles.USER]"
           class="cart-icon"
-          (click)="toggleState()"
+          (click)="open()"
           title="cart"
         >
           <fa-icon [icon]="faShoppingCart"></fa-icon>
@@ -21,7 +21,7 @@
           </span>
           <div *hasRoles="[roles.ADMIN]" title="admin role" class="chip">a</div>
         </div>
-        <button class="btn border" (click)="authService.logout()">
+        <button class="btn border" (click)="logout()">
           Logout
         </button>
       </div>
@@ -33,34 +33,5 @@
       </div>
     </ng-template>
   </div>
-  <section class="back-drop" [class.active]="state === 'open'"></section>
-  <section [@slideOpen]="state" class="sidebar">
-    <div class="actions">
-      <button class="close-icon" (click)="toggleState()">X</button>
-    </div>
-    <div *ngIf="cart.items.length; else emptyCart">
-      <div class="cart-items">
-        <div *ngFor="let item of cart.items" class="cart-item">
-          <img
-            [src]="item.product.imageUrl"
-            alt="product image"
-            class="cart-image"
-          />
-          <div class="cart-details">
-            <h3>{{item.product.name}}</h3>
-            <p>{{item.product.price | currency}}</p>
-          </div>
-          <div class="cart-actions">
-            <button class="btn">Remove</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <ng-template #emptyCart>
-      <div class="empty-cart">
-        <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-8580703-6763417.png" alt="empty-cart-image">
-        <h3>nothing there yet!</h3>
-      </div>
-    </ng-template>
-  </section>
+  <!-- <app-cart [state]="state" [cartItems]="cartItems" ></app-cart> -->
 </header>

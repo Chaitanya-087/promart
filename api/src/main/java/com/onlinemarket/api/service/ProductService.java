@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.onlinemarket.api.binding.ProductRequest;
+import com.onlinemarket.api.dto.CategoryDTO;
 import com.onlinemarket.api.dto.ProductDTO;
 import com.onlinemarket.api.entity.Category;
 import com.onlinemarket.api.entity.Product;
@@ -66,7 +67,6 @@ public class ProductService {
                 });
             product.setCategory(category);
         }
-
         productRepository.save(product);
         return mapToDTO(product);
     }
@@ -79,7 +79,7 @@ public class ProductService {
         product.setPrice(request.getPrice());
         product.setImageUrl(request.getImageUrl());
     
-        Category category = categoryRepository.findByName(request.getCategoryName())
+        Category category = categoryRepository.findByName(request.getCategoryName().toLowerCase())
             .orElseGet(() -> {
                 Category newCategory = new Category();
                 newCategory.setName(request.getCategoryName());
@@ -96,8 +96,12 @@ public class ProductService {
     
         return mapToDTO(product);
     }
-    
 
+    @Transactional
+    public List<CategoryDTO> getCategories() {
+        return categoryRepository.findAllCategoryDTOs();
+    }
+    
     @Transactional
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
@@ -109,8 +113,9 @@ public class ProductService {
             .name(product.getName())
             .description(product.getDescription())
             .price(product.getPrice())
-            .categoryId(product.getCategory().getId())
+            .categoryName(product.getCategory().getName())
             .imageUrl(product.getImageUrl())
+            .quantity(product.getStock().getQuantity())
             .build();
     }
 

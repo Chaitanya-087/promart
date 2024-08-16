@@ -1,0 +1,45 @@
+<div @slide *ngIf="!cartService.hidden" class="sidebar">
+  <div class="actions">
+    <button class="close-icon" (click)="cartService.toggle()">
+      <fa-icon [icon]="faXmark"></fa-icon>
+    </button>
+  </div>
+  <div class="sidebar-content" *ngIf="cartItems.length; else emptyCart">
+    <div class="cart-items" >
+      <div class="cart-item" *ngFor="let item of this.cartItems"  [class.selected]="isSelected(item.id)">
+        <div (click)="selectCartItem(item.id)" class="selector" [class.active]="isSelected(item.id)"></div>
+        <div class="image-wrapper">
+          <img class="cart-image" [src]="item.imageUrl" alt="">
+        </div>
+        <div class="details-wrapper">
+          <h3>{{item.productName}}</h3>
+          <div class="price">{{item.price | currency}} x {{item.quantity}}         <span class="total">Total: {{item.price * item.quantity| currency}}</span></div>
+          <div class="item-action-wrapper">
+            <div class="quantity">
+              <fa-icon class="plus" [icon]="faMinus" (click)="decreaseQuantity(item.id)"></fa-icon>
+              <span class="count">{{item.quantity}}</span>
+              <fa-icon class="minus" [icon]="faPlus" (click)="increaseQuantity(item.id)"></fa-icon>
+            </div>
+            <button class="remove" (click)="removeFromCart(item.id)" title="remove from cart">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total-price">
+      <span class="text">Total</span>
+      <span class="price">{{totalPrice | currency}}</span>
+    </div>
+  </div>
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <img
+        src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-8580703-6763417.png"
+        alt="empty-cart-image"
+      />
+      <h3>nothing there yet!</h3>
+    </div>
+  </ng-template>
+</div>
+<div class="back-drop" [class.active]="!cartService.hidden" (click)="cartService.toggle()"></div>

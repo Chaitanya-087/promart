@@ -11,6 +11,9 @@ import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,5 +27,6 @@ public class Category implements Serializable {
   private String name;
 
   @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JsonIgnore
   private List<Product> products = new ArrayList<Product>();
 }

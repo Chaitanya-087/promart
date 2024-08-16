@@ -4,3 +4,4 @@ export * from './authResponse';
 export * from './Role';
 export * from './product';
 export * from './category';
+export * from './productForm';

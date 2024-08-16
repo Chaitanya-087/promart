@@ -6,13 +6,16 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouteGuard } from './_helpers';
 import { BaseTemplateComponent } from './base-template/base-template.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { RoleGuard } from './_helpers/role.guard';
 
 const routes: Routes = [
-  {path: "", redirectTo: "home", pathMatch: "full"},
+  {path:"", redirectTo: "home", pathMatch: "full"},
   {
     path: "",
     children:[
       {path: "home", component: HomeComponent},
+      {path: "admin",component: AdminHomeComponent, canActivate: [RoleGuard]}
     ],
     component: BaseTemplateComponent,
     canActivate: [RouteGuard],
@@ -24,7 +27,7 @@ const routes: Routes = [
       {path: "signup", component: SignupComponent},
     ],
     component: AuthTemplateComponent,
-  }
+  },
 ];
 
 @NgModule({

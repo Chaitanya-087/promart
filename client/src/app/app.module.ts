@@ -1,3 +1,4 @@
+import { productReducer } from './store/product/product.reducer';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,7 +16,14 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { HasRoleDirective } from './_helpers';
 import { BaseTemplateComponent } from './base-template/base-template.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { CartComponent } from "./cart/cart.component";
+import { PopupComponent } from './popup/popup.component';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffect } from './store/product/product.effects';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignupComponent,
     NavbarComponent,
     BaseTemplateComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +44,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxUiLoaderModule,
     HasRoleDirective,
     BrowserAnimationsModule,
+    PopupComponent,
+    StoreModule.forRoot({product: productReducer}),
+    EffectsModule.forRoot([ProductEffect]),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      progressBar:true
+    }),
 ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    provideToastr({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      progressBar: true
+      
+    }),
+    provideAnimations()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

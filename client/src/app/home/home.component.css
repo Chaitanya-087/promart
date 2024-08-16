@@ -52,19 +52,79 @@
 
 .body {
   padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-
+.content {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
 .name {
   font-size: 1.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .desc {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  height: 60px;
+  overflow-y:auto;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .price {
   opacity: 70%;
+}
+
+/*add to cart*/
+.actions {
+  display: flex;
+}
+.add-sub-btn {
+  /* gap: 1rem; */
+  padding:0.25rem 0.5rem;
+  border-radius:0.25rem ;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+fa-icon {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.plus {
+  padding-inline: 0.5rem;
+  border-right: 1px solid #e7e7e7;
+}
+.count {
+  padding-inline: 0.5rem;
+}
+.minus {
+  padding-inline: 0.5rem;
+  border-left: 1px solid #e7e7e7;
+}
+.cart-btn {
+  margin-left: auto;
+  color: white;
+  background-color: rgb(94,61,179);
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1.2;
 }

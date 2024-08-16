@@ -6,14 +6,14 @@ button {
 
 .wrapper {
   height: 60px;
-  background-color: rgba(172, 172, 172, 0);
+  background-color: rgba(255, 255, 255);
   border-bottom: 1px solid #e7e7e7;
   display: flex;
   align-items: center;
   position: fixed;
   width: 100%;
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   z-index: 100;
 }
 
@@ -24,6 +24,10 @@ button {
   width: 100%;
   max-width: 90%;
   margin: auto;
+}
+
+ngx-toastr.ng-success {
+  top: 2rem !important;
 }
 
 .flex {
@@ -59,15 +63,13 @@ button {
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-  border: 1px solid #e7e7e7;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #5e3db3;
+  background-color: rgb(94, 61, 179);
   position: relative;
 }
-.cart-icon,
-.close-icon {
+.cart-icon{
   width: 35px;
   height: 35px;
   cursor: pointer;
@@ -132,84 +134,4 @@ button {
 
 .active {
   color: #007bff;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 400px;
-  background-color: white;
-  right: 0;
-  z-index: 9999;
-  border-left: 1px solid #e7e7e7;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.back-drop {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  z-index: 200;
-  display: none;
-  top: 0;
-  left: 0;
-  backdrop-filter: blur(10px) saturate(142%);
-  -webkit-backdrop-filter: blur(10px) saturate(142%);
-  background-color: rgba(0, 0, 0, 0.516);
-}
-.back-drop.active {
-  display: block;
-}
-
-.actions {
-  border-bottom: 1px solid #e7e7e7;
-  height: 67px;
-  padding-inline: 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.cart-items {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.cart-item {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-  height: 100px;
-}
-
-.cart-image {
-  width: 100%;
-  height: inherit;
-  object-fit: contain;
-}
-
-.empty-cart {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  height: inherit;
-  justify-content: center;
-  align-items: center;
-}
-
-.empty-cart > img {
-  width: 100%;
-  object-fit: contain;
-  position: relative;
-}
-
-
-@media screen and (width <=768px) {
-  .sidebar {
-    width: calc(100vw - 60px);
-  }
 }

@@ -7,13 +7,6 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { NgxUiLoaderService } from "ngx-ui-loader";
-import {
-  animate,
-  state,
-  style,
-  trigger,
-  transition,
-} from "@angular/animations";
 
 @Component({
   selector: "app-login",

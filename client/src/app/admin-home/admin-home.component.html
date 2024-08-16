@@ -1,0 +1,74 @@
+<section class="wrapper">
+  <div class="actions">
+    <button class="add-btn" (click)="onClickAddProduct()">
+      <fa-icon [icon]="faPlus"></fa-icon> Add Product
+    </button>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>quantity</th>
+        <th>description</th>
+        <th>category</th>
+        <th>actions</th>
+      </tr>
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>
+          <a class="product-url" href="{{product.imageUrl}}" target="_blank">
+            {{product.name}}
+          </a>
+        </td>
+        <td>{{product.price}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.categoryName}}</td>
+        <td>
+          <div class="btn-group">
+            <button class="btn edit-btn" (click)="select(product)">
+              <fa-icon [icon]="faPen"></fa-icon>
+              Edit</button>
+            <button class="btn delete-btn" (click)="deleteProduct(product.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+              Delete</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<app-popup #productForm title="add product">
+  <form #form="ngForm" (ngSubmit)="this.addProduct(form.value)">
+    <input type="text" name="name" placeholder="name" ngModel />
+    <input type="number" name="price" placeholder="price" ngModel />
+    <input type="number" name="quantity" placeholder="quantity" ngModel />
+    <input type="text" name="imageUrl" placeholder="image url" ngModel />
+    <input type="text" name="description" placeholder="description" ngModel />
+    <input type="text" name="categoryName" placeholder="categoryName" ngModel />
+    <button type="submit">Add</button>
+  </form>
+</app-popup>
+
+<app-popup #popup title="update product">
+  <form *ngIf="selectedProduct">
+    <input type="text" name="name" [(ngModel)]="selectedProduct.name" />
+    <input type="number" name="price" [(ngModel)]="selectedProduct.price" />
+    <input type="number" name="quantity" [(ngModel)]="selectedProduct.quantity" />
+    <input
+      type="text"
+      name="description"
+      [(ngModel)]="selectedProduct.description"
+    />
+    <input
+      type="text"
+      name="categoryName"
+      [(ngModel)]="selectedProduct.categoryName"
+    />
+    <input type="text" name="imageUrl" [(ngModel)]="selectedProduct.imageUrl" />
+    <button (click)="updateProduct(selectedProduct)">Update</button>
+  </form>
+</app-popup>

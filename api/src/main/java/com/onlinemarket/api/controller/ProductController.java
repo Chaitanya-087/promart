@@ -3,6 +3,7 @@ package com.onlinemarket.api.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.onlinemarket.api.binding.ProductRequest;
+import com.onlinemarket.api.dto.CategoryDTO;
 import com.onlinemarket.api.dto.MessageDTO;
 import com.onlinemarket.api.dto.ProductDTO;
 import com.onlinemarket.api.service.ProductService;
@@ -55,6 +56,11 @@ public class ProductController {
     public ResponseEntity<MessageDTO> deleteProduct(@RequestParam Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.ok(new MessageDTO("Product deleted successfully"));
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<CategoryDTO>> getCategories() {
+        return ResponseEntity.ok(productService.getCategories());
     }
 
 }

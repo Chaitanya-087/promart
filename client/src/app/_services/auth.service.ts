@@ -65,9 +65,14 @@ export class AuthService {
     if (res && res.token) {
       this.isLoggedIn$.next(true);
       localStorage.setItem("token", res.token);
-      this.router.navigate(["/home"]);
+      if (this.role === Role.ADMIN) {
+        this.router.navigate(["/admin"]);
+      } else {
+        this.router.navigate(["/home"]);
+      }
     }
   }
+
   private mapRole(role: string): Role {
     switch(role) {
       case "ADMIN":

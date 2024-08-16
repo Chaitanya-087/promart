@@ -1,0 +1,148 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: column;
+  width: 85%;
+  margin: auto;
+  padding-block:2rem ;
+  overflow-x:auto;
+}
+.table-wrapper {
+  width: 100%;
+  overflow-x:auto;
+}
+table {
+  font-family: arial, sans-serif;
+  border-radius: 0.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  overflow:scroll;
+}
+
+td,
+th {
+  border: 1px solid #e7e7e7;
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #f2f2f2;
+  text-transform: capitalize;
+}
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  flex: wrap;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  color: white;
+}
+
+.edit-btn {
+  background-color: rgba(0, 128, 0, 0.2);
+  color: green;
+}
+
+.delete-btn {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: red;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+form input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.product-url {
+  color: rgb(94,61,179);
+  font-weight: 600;
+  text-decoration: underline;
+}
+form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  width: 100%;
+}
+
+form input[type="number"]::-webkit-outer-spin-button,
+form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+form input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.add-btn {
+  gap: 0.5rem;
+  display: flex;
+  padding: 0.5rem 0.75rem;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(94,61,179);
+  color: white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
+  .table-wrapper {
+    width: 100%;
+  }
+  table {
+    width: 100%;
+  }
+  .btn-group {
+    flex-direction: column;
+  }
+  form {
+    width: 100%;
+  }
+  form input {
+    width: 100%;
+  }
+  form button {
+    width: 100%;
+  }
+}
