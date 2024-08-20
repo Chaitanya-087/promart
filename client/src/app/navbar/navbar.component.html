@@ -1,11 +1,11 @@
 <header class="wrapper">
   <div class="navbar">
-    <div class="logo-wrapper" routerLink="/home">
+    <div class="logo-wrapper" routerLink="/promart/home">
       <img src="assets/logo.png" alt="promart logo" class="logo" />
     </div>
     <div *ngIf="isLoggedIn; else authTemplate">
       <div class="flex">
-        <!-- <div>orders</div> -->
+        <a *hasRoles="[roles.USER]" routerLink="/promart/orders" [class.active]="router.isActive('/promart/orders', true)" class="nav-link">orders</a>
         <div
           *hasRoles="[roles.USER]"
           class="cart-icon"
@@ -13,7 +13,7 @@
           title="cart"
         >
           <fa-icon [icon]="faShoppingCart"></fa-icon>
-          <span *ngIf="cartCount" class="chip cart-count">{{cartCount}}</span>
+          <span *ngIf="cartCount" class="chip cart-count">{{ cartCount.valueOf() > 9 ? '9+' : cartCount }}</span>
         </div>
         <div class="avatar">
           <span class="username" [title]="user.username">
@@ -28,10 +28,10 @@
     </div>
     <ng-template #authTemplate>
       <div class="flex">
-        <button class="btn" routerLink="/signup">Signup</button>
-        <button class="btn border" routerLink="/login">Login</button>
+        <button class="btn" routerLink="/auth/signup">Signup</button>
+        <button class="btn border" routerLink="/auth/login">Login</button>
       </div>
     </ng-template>
   </div>
-  <!-- <app-cart [state]="state" [cartItems]="cartItems" ></app-cart> -->
+  <app-cart *hasRoles="[roles.USER]"></app-cart>
 </header>

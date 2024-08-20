@@ -12,8 +12,6 @@ button {
   align-items: center;
   position: fixed;
   width: 100%;
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
   z-index: 100;
 }
 
@@ -26,8 +24,11 @@ button {
   margin: auto;
 }
 
-ngx-toastr.ng-success {
-  top: 2rem !important;
+.nav-link{
+  color: rgb(79,61,149);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .flex {
@@ -100,13 +101,6 @@ ngx-toastr.ng-success {
   font-size: small;
 }
 
-.chip.cart-count {
-  border-color: transparent;
-  font-size: 0.65rem;
-  background-color: red;
-  color: white;
-}
-
 .username {
   font-weight: 600;
   color: white;
@@ -133,5 +127,14 @@ ngx-toastr.ng-success {
 }
 
 .active {
-  color: #007bff;
+  color: rgb(94, 61, 179);
+}
+
+.chip.cart-count {
+  border-color: transparent;
+  font-size: 0.65rem;
+  background-color: red;
+  color: white;
+  top: 0;
+  right: 0;
 }

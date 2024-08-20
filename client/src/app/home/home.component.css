@@ -76,8 +76,21 @@
   color: rgba(0, 0, 0, 0.7);
 }
 
+.price-container {
+  display: flex;flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stock-left {
+  color: tomato;
+  font-size: 12px;
+  text-wrap: nowrap;
+  font-weight: 600;
+}
+
 .price {
   opacity: 70%;
+  align-self: flex-end;
 }
 
 /*add to cart*/
@@ -105,6 +118,7 @@ fa-icon {
   padding-inline: 0.5rem;
   border-right: 1px solid #e7e7e7;
 }
+
 .count {
   padding-inline: 0.5rem;
 }

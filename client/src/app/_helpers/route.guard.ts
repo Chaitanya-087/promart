@@ -11,7 +11,7 @@ export class RouteGuard {
   canActivate(): Boolean | Observable<Boolean | UrlTree> {
     this.auth.isLoggedIn.subscribe(res => {
       if (!res) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
       }
     });
     return this.auth.isLoggedIn;

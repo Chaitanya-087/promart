@@ -53,4 +53,11 @@ public class CartController {
     public ResponseEntity<List<CartItemDTO>> getCartItems(@RequestParam String id) {
         return ResponseEntity.ok(cartService.getCartItems(id));
     }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/cart/clear")
+    public ResponseEntity<MessageDTO> clearCart(@RequestParam String id) {
+        cartService.deleteCart(id);
+        return ResponseEntity.ok(new MessageDTO("Cart cleared successfully"));
+    }
 }

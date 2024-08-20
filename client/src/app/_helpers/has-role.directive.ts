@@ -32,7 +32,6 @@ export class HasRoleDirective implements OnChanges {
     this.authService.isLoggedIn.subscribe((value: boolean) => {
       if (value) {
         if (this.roles.includes(this.authService.role)) {
-          console.log("Role is", this.authService.role);
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
           this.viewContainer.clear();

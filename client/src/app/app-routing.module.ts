@@ -8,20 +8,22 @@ import { RouteGuard } from './_helpers';
 import { BaseTemplateComponent } from './base-template/base-template.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { RoleGuard } from './_helpers/role.guard';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
-  {path:"", redirectTo: "home", pathMatch: "full"},
+  {path:"", redirectTo: "promart/home", pathMatch: "full"},
   {
-    path: "",
+    path: "promart",
     children:[
       {path: "home", component: HomeComponent},
-      {path: "admin",component: AdminHomeComponent, canActivate: [RoleGuard]}
+      {path: "admin",component: AdminHomeComponent, canActivate: [RoleGuard]},
+      {path: "orders",component: OrdersComponent},
     ],
     component: BaseTemplateComponent,
     canActivate: [RouteGuard],
   },
   {
-    path: "",
+    path: "auth",
     children: [
       {path: "login", component: LoginComponent},
       {path: "signup", component: SignupComponent},

@@ -6,6 +6,7 @@ import { Product, ProductForm } from "../_models";
 import { NgFor, NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { PopupComponent } from "../popup/popup.component";
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-admin-home",
   standalone: true,
@@ -21,7 +22,7 @@ export class AdminHomeComponent {
   selectedProduct?: Product;
   faTrash = faTrash;
   faPen = faPen;
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private toastrService: ToastrService) {}
   ngOnInit() {
     this.getProducts();
   }
@@ -31,9 +32,11 @@ export class AdminHomeComponent {
       this.products = products;
     });
   }
+  
   onClickAddProduct():void {
     this.productForm.showPopup();
   }
+
   select(product: Product) {
     this.selectedProduct = product;
     this.popup.showPopup();
@@ -41,14 +44,13 @@ export class AdminHomeComponent {
 
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe((_) => {
-      console.log("Product deleted");
       this.getProducts();
     });
   }
 
   updateProduct(product: Product) {
     this.productService.updateProduct(product).subscribe(
-      _ => {this.popup.closePopup();}
+      _ => {this.popup.closePopup();this.toastrService.success("Updated Product " + product.name);},
     );
   }
 
@@ -56,6 +58,7 @@ export class AdminHomeComponent {
     this.productService.addProduct(product).subscribe((res) => {
       this.getProducts();
       this.productForm.closePopup();
+      this.toastrService.success("Added Product " + res.name);
     });
   }
   

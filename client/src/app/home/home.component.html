@@ -13,7 +13,10 @@
             <h3 class="name">{{product.name}}</h3>
             <p class="desc">{{product.description}}</p>
           </div>
-          <div class="price">{{product.price | currency}}</div>
+          <div class="price-container">
+            <p class="stock-left" *ngIf="product.quantity < 20">{{product.quantity}} left in stock</p>
+            <div class="price">{{product.price | currency}}</div>
+          </div>
         </div>
         <div class="actions">
           <div *hasRoles="[roles.USER]" class="add-sub-btn">
@@ -29,5 +32,4 @@
       </div>
     </div>
   </div>
-  <app-cart [cartItems]="cartItems" ></app-cart>
 </section>

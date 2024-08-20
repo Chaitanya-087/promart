@@ -6,12 +6,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.onlinemarket.api.binding.OrderForm;
+import com.onlinemarket.api.controller.exception.InsufficientStockException;
 import com.onlinemarket.api.dto.OrderDTO;
 import com.onlinemarket.api.entity.Address;
 import com.onlinemarket.api.entity.Bill;
 import com.onlinemarket.api.entity.CartItem;
 import com.onlinemarket.api.entity.Order;
 import com.onlinemarket.api.entity.OrderItem;
+import com.onlinemarket.api.entity.OrderStatus;
 import com.onlinemarket.api.entity.Product;
 import com.onlinemarket.api.entity.User;
 import com.onlinemarket.api.repository.CartItemRepository;
@@ -54,8 +56,13 @@ public class OrderService {
         cartItems.forEach(cartItem -> {
             OrderItem oi = new OrderItem();
             Product product = cartItem.getProduct();
+            Integer quantity = cartItem.getQuantity();
+            if (!isStockAvailable(product,quantity)) {
+                throw new InsufficientStockException("Insufficient stock for product " + product.getName());
+            }
+            product.getStock().setQuantity(product.getStock().getQuantity() - quantity);
             oi.setProduct(product);
-            oi.setQuantity(cartItem.getQuantity());
+            oi.setQuantity(quantity);
             oi.setPrice(product.getPrice() * cartItem.getQuantity());
             oi.setOrder(newOrder);
             newOrder.getOrderItems().add(oi);
@@ -81,5 +88,27 @@ public class OrderService {
                 .orderAmount(order.getOrderAmount())
                 .orderItems(order.getOrderItems())
                 .build();
+    }
+
+    private  boolean isStockAvailable(Product product,Integer quantity) {
+        return product.getStock().getQuantity() >= quantity;
+    }
+
+    public void cancelOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found"));
+        order.setOrderStatus(OrderStatus.CANCELLED);
+        List<OrderItem> orderItems = order.getOrderItems();
+
+        //return the stock back to the product
+        orderItems.forEach(orderItem -> {
+            Product product = orderItem.getProduct();
+            product.getStock().setQuantity(product.getStock().getQuantity() + orderItem.getQuantity());
+        });
+        orderRepository.save(order);
+    }
+    
+    public void deleteOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found"));
+        orderRepository.delete(order);
     }
 }

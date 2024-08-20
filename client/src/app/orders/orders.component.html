@@ -1,0 +1,80 @@
+<div class="orders" *ngIf="orders.length > 0; else emptyTemplate">
+  <div *ngFor="let order of orders" class="order">
+    <div class="order-header-wrapper">
+      <div class="order-header">
+        <h3 class="title">Order ID: {{ order.id }} <span class="chip" [ngStyle]="{
+          'background-color': findStatus(order.orderStatus).background,
+          'color': findStatus(order.orderStatus).color
+        }">{{order.orderStatus}}</span> </h3>
+        <p class="date"><span>Order date:</span> {{ order.orderDate | date }}
+        </p>
+      </div>
+      <div class="actions">
+        <button class="cancel-btn" *ngIf="order.orderStatus === 'ORDERED'; else deleteTemplate" (click)="cancelOrder(order.id)">cancel order</button>
+        <ng-template #deleteTemplate>
+          <button (click)="deleteOrder(order.id)" class="delete-btn">
+            <fa-icon [icon]="faTrash"></fa-icon>
+            delete</button>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="order-items">
+      <div *ngFor="let item of order.orderItems" class="order-item">
+        <img
+          [src]="item.product.imageUrl"
+          alt="{{ item.product.name }}"
+          class="product-image"
+        />
+        <div class="order-item-details">
+          <p class="name">{{ item.product.name }}</p>
+          <p class="desc">{{ item.product.description }}</p>
+        </div>
+        <div class="order-item-price">
+          <p class="price">{{ item.price | currency }}</p>
+          <p class="quantity">Qty: {{ item.quantity }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-1">
+      <div class="payment">
+        <p class="title">Payment</p>
+        <p class="payment-method">{{ order.bill.paymentMethod }}</p>
+      </div>
+
+      <div class="delivery">
+        <p class="title">Delivery</p>
+        <p class="subtitle">Address</p>
+        <p class="address">
+          {{ order.address.fullAddress }}, {{ order.address.city }}, {{
+          order.address.state }} - {{ order.address.pincode }}
+          {{order.address.phoneNumber}}
+        </p>
+      </div>
+    </div>
+
+    <div class="summary-2">
+      <div></div>
+      <div class="order-summary">
+        <h4 class="subtitle">Order Summary</h4>
+        <p class="subtotal">
+          <span>Subtotal :</span> {{ order.bill.paymentAmount| currency }}
+        </p>
+        <div class="extras-container">
+          <p class="extras"><span>Shipping :</span> {{ 0 | currency }}</p>
+        </div>
+        <p class="total">
+          <span>Total :</span> {{ order.bill.paymentAmount| currency }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyTemplate>
+  <div class="empty">
+    <img src="./assets/no-results-found.jpg" alt="no results image">
+    <p>No orders found!!!</p>
+  </div>
+</ng-template>

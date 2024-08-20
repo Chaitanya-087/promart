@@ -6,8 +6,9 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { Component, Input } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { faXmark,faPlus,faMinus,faTrash } from "@fortawesome/free-solid-svg-icons";
+import { PopupComponent } from "../popup/popup.component";
 
 @Component({
   selector: "app-cart",
@@ -20,7 +21,7 @@ import { faXmark,faPlus,faMinus,faTrash } from "@fortawesome/free-solid-svg-icon
         animate("200ms ease-in", style({ transform: "translateX(0%)" })),
       ]),
       transition(":leave", [
-        animate("200ms ease-in", style({ transform: "translateX(100%)" })),
+        animate("60ms ease-in", style({ transform: "translateX(100%)" })),
       ]),
     ]),
   ],
@@ -30,32 +31,63 @@ export class CartComponent {
   faPlus = faPlus;
   faMinus = faMinus;
   faTrash = faTrash;
-  selectedCartItems: number[] = [];
-  @Input() cartItems: CartItem[] = [];
+  cartItems: CartItem[] = [];
+  @ViewChild('orderForm') orderForm!: PopupComponent;
+  selectedCartItems: CartItem[] = [];
 
   constructor(public cartService: CartService) {}
 
+  ngOnInit(): void {
+    this.cartService.cartItems.subscribe((items) => {
+      this.cartItems = items;
+    });
+  }
+  isCheckoutButtonVisible(): boolean {
+    return this.selectedCartItems.length > 0 && this.cartItems.length > 0; 
+  }
   removeFromCart(id: number): void {
     this.cartService.deleteCartItem(id).subscribe(
       _ => {
         this.cartItems = this.cartItems.filter(item => item.id !== id);
-        this.cartService.cartItemCount.next(this.cartItems.length);
+        this.selectedCartItems = this.selectedCartItems.filter(item => item.id !== id);
       }
     );
   }
 
-  selectCartItem(id: number): void {
-    if (this.selectedCartItems.includes(id)) {
+  clearCart(): void {
+    this.cartService.clearCart().subscribe();
+  }
+
+  toggleCartItem(cartItem: CartItem): void {
+    if (this.isSelected(cartItem.id)) {
       this.selectedCartItems = this.selectedCartItems.filter(
-        (itemId) => itemId !== id
+        (item) => item.id !== cartItem.id
       );
     } else {
-      this.selectedCartItems.push(id);
+      this.selectedCartItems.push(cartItem);
+    }
+  }
+
+  toggleAll(): void {
+    if (this.selectedCartItems.length === this.cartItems.length) {
+      this.selectedCartItems = [];
+    } else {
+      this.selectedCartItems = [...this.cartItems];
     }
   }
 
   isSelected(id: number): boolean {
-    return this.selectedCartItems.includes(id);
+    return this.selectedCartItems.find((item) => item.id === id) ? true : false;
+  }
+
+  checkout(): void {
+    this.cartService.close();
+    this.orderForm.showPopup();
+  }
+
+  close(): void {
+    this.cartService.close();
+    this.selectedCartItems = [];
   }
 
   get totalPrice(): number {
@@ -65,15 +97,16 @@ export class CartComponent {
     );
   }
 
+  get selectedItemsPrice(): number {
+    const selectedItems = this.cartItems.filter((item) => this.isSelected(item.id));
+    return selectedItems.reduce((acc,item) => acc + item.price * item.quantity,0);
+  }
+
   decreaseQuantity(id: number): void {
     this.cartItems.forEach(item => {
       if (item.id === id) {
         item.quantity = item.quantity > 1 ? item.quantity - 1 : 1;
-        this.cartService.updateCartItem(item.id,item.productId,item.quantity).subscribe(
-          _ => {
-            this.cartService.cartItemCount.next(this.cartItems.length);
-          }
-        );
+        this.cartService.updateCartItem(item.id,item.productId,item.quantity).subscribe();
       }
     })
   }
@@ -82,11 +115,7 @@ export class CartComponent {
     this.cartItems.forEach(item => {
       if (item.id === id) {
         item.quantity++;
-        this.cartService.updateCartItem(item.id,item.productId,item.quantity).subscribe(
-          _ => {
-            this.cartService.cartItemCount.next(this.cartItems.length);
-          }
-        );
+        this.cartService.updateCartItem(item.id,item.productId,item.quantity).subscribe();
       }
     })
   }

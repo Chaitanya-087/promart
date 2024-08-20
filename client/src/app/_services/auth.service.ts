@@ -29,7 +29,7 @@ export class AuthService {
   logout(): void {
     this.isLoggedIn$.next(false);
     localStorage.removeItem("token");
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/auth/login"]);
   }
 
   get isLoggedIn(): Observable<boolean> {
@@ -66,9 +66,9 @@ export class AuthService {
       this.isLoggedIn$.next(true);
       localStorage.setItem("token", res.token);
       if (this.role === Role.ADMIN) {
-        this.router.navigate(["/admin"]);
+        this.router.navigate(["/promart/admin"]);
       } else {
-        this.router.navigate(["/home"]);
+        this.router.navigate(["/promart/home"]);
       }
     }
   }

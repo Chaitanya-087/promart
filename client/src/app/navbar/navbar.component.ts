@@ -2,9 +2,8 @@ import { Component } from "@angular/core";
 import { AuthService } from "../_services/auth.service";
 import { Role, User } from "../_models";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { BehaviorSubject } from "rxjs";
-import { CartItem } from "../_models/cartItem";
 import { CartService } from "../_services/cart.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-navbar",
@@ -25,19 +24,24 @@ export class NavbarComponent {
 
   constructor(
     private authService: AuthService,
-    public cartService: CartService
+    public cartService: CartService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
     this.getUser();
     this.setAuthStatus();
-    this.cartService.cartItemCount.subscribe(
-      (count) => (this.cartCount = count)
-    );
+    this.getCartCount();
   }
 
   open(): void {
-    this.cartService.toggle();
+    this.cartService.open();
+  }
+
+  getCartCount(): void {
+    this.cartService.cartItemCount.subscribe(
+      (count) => (this.cartCount = count)
+    );
   }
 
   setAuthStatus(): void {

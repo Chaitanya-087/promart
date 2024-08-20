@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.onlinemarket.api.controller.exception.InsufficientStockException;
 import com.onlinemarket.api.dto.ErrorDTO;
 
 @ControllerAdvice
@@ -43,6 +44,18 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<ErrorDTO>(
         ErrorDTO.builder().status(HttpStatus.NOT_FOUND.value()).message(e.getMessage()).build(),
         HttpStatus.NOT_FOUND
+    );
+  }
+
+
+  @ExceptionHandler(InsufficientStockException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ResponseEntity<ErrorDTO> handleInsufficientStockException(
+    InsufficientStockException e
+  ) {
+    return new ResponseEntity<ErrorDTO>(
+        ErrorDTO.builder().status(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build(),
+        HttpStatus.BAD_REQUEST
     );
   }
 }

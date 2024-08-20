@@ -1,0 +1,107 @@
+<div class="wrapper">
+  <h2 class="sub-title-2">Order Items</h2>
+  <div class="order-items">
+    <div class="order-item" *ngFor="let item of this.selectedItems">
+      <div class="image-wrapper">
+        <img src="{{item.imageUrl}}" class="item-image" alt="product image" />
+      </div>
+      <div class="order-body">
+        <div class="desc">
+          <h3 class="name">{{item.productName}}</h3>
+          <span class="category-container"
+            >Category: <span class="category">{{item.categoryName}}</span></span
+          >
+        </div>
+        <div class="price-container">
+          <span class="price"
+            >{{item.price}} X {{item.quantity}}
+            <span class="total">
+              {{item.price * item.quantity}}
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="sub-title-2">Address</h2>
+  <form>
+    <div class="input-group">
+      <label htmlFor="fullAddress" class="label">
+        Full Address *
+      </label>
+      <div class="input-container">
+        <textarea
+          type="text"
+          name="fullAddress"
+          [(ngModel)]="form.address.fullAddress"
+          required
+        >
+        </textarea>
+      </div>
+    </div>
+    <div class="input-group">
+      <label htmlFor="city" class="label">
+        city *
+      </label>
+      <div class="input-container">
+        <input
+          type="text"
+          name="city"
+          [(ngModel)]="form.address.city"
+          required
+        />
+      </div>
+    </div>
+    <div class="input-group">
+      <label htmlFor="state" class="label">
+        state *
+      </label>
+      <div class="input-container">
+        <input
+          type="text"
+          name="state"
+          [(ngModel)]="form.address.state"
+          required
+        />
+      </div>
+    </div>
+    <div class="input-group">
+      <label htmlFor="pincode" class="label">
+        pincode *
+      </label>
+      <div class="input-container">
+        <input
+          type="text"
+          name="pincode"
+          [(ngModel)]="form.address.pincode"
+          required
+        />
+      </div>
+    </div>
+    <div class="input-group">
+      <label htmlFor="phoneNumber" class="label">
+        phoneNumber *
+      </label>
+      <div class="input-container">
+        <input
+          type="text"
+          name="phoneNumber"
+          [(ngModel)]="form.address.phoneNumber"
+          required
+        />
+      </div>
+    </div>
+    <h2 class="sub-title-2">payment methods</h2>
+    <ul class="methods">
+      <li class="method" *ngFor="let method of this.paymentMethods">
+        <input
+          type="radio"
+          [value]="method"
+          name="paymentMethod"
+          [(ngModel)]="form.paymentMethod"
+        />{{method}}
+      </li>
+    </ul>
+    <button class="placeorder-btn" (click)="placeOrder()">place order</button>
+  </form>
+</div>

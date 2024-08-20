@@ -1,0 +1,241 @@
+/* src/app/orders/orders.component.css */
+.orders {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 700px;
+  margin: auto;
+}
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty p {
+  color: rgb(79,61,149);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.empty img {
+  width: 400px;
+  object-fit: contain;
+}
+
+.delete-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: tomato;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 1rem;
+  font-weight: 700;
+}
+
+.cancel-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(94,61,179);
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 1rem;
+  font-weight: 700;
+}
+
+.order {
+  border: 1px solid #e7e7e7;
+  padding-inline: 1rem;
+}
+
+.order-header-wrapper {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+
+.actions {
+  margin-left: auto;
+}
+
+.order-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-header .title {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500; 
+  gap: 1rem;
+}
+
+.order-header .chip {
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+}
+
+.order-header .date {
+  font-size: 0.85rem;
+  color: rgb(46,46,46);
+}
+
+.order-header .date span {
+  font-weight: 500;
+  color: #777;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-block: 1px solid #e7e7e7;
+}
+
+.order-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-item-details .desc {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.order-item-price {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.order-item-price .price {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.order-item-price .quantity {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.product-image {
+  display: block;
+  width: 90px;
+  height: 90px;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border: 1px solid #e7e7e7;
+}
+
+.summary-1,.summary-2 {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding-block:1rem;
+}
+
+.summary-1 {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.summary-1 > * ,.summary-2 > * {
+  flex: 1;
+}
+
+.payment {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.payment .title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.delivery .title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.25rem;
+}
+
+.delivery .address {
+  font-size: 1rem;
+  color: rgb(46,46,46);
+  line-height: 1.25rem;
+}
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.order-summary p{
+  display: flex;
+  justify-content: space-between;
+}
+
+.extras-container {
+  padding-block: 0.5rem;
+  border-bottom: 1px dashed #e7e7e7;
+}
+
+.order-summary .extras {
+  font-size:0.85rem;
+  color: #777;
+}
+
+.order-summary .subtotal {
+  font-size: 1rem;
+  color: rgb(46,46,46);
+}
+
+.order-summary .total {
+  padding-top: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(46,46,46);
+}
+
+
+@media screen and (width <= 768px) {
+  .orders {
+    max-width: 100%;
+    padding: 0;
+    padding-block: 0.75rem;
+  }
+}

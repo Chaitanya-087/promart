@@ -1,4 +1,3 @@
-import { productReducer } from './store/product/product.reducer';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,9 +19,8 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { CartComponent } from "./cart/cart.component";
 import { PopupComponent } from './popup/popup.component';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { ProductEffect } from './store/product/product.effects';
+import { OrderFormComponent } from './order-form/order-form.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +31,9 @@ import { ProductEffect } from './store/product/product.effects';
     SignupComponent,
     NavbarComponent,
     BaseTemplateComponent,
-    CartComponent
+    CartComponent,
+    OrderFormComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -45,20 +45,16 @@ import { ProductEffect } from './store/product/product.effects';
     HasRoleDirective,
     BrowserAnimationsModule,
     PopupComponent,
-    StoreModule.forRoot({product: productReducer}),
-    EffectsModule.forRoot([ProductEffect]),
     ToastrModule.forRoot({
-      timeOut: 10000,
+      timeOut: 1000,
       positionClass: 'toast-top-center',
-      preventDuplicates: true,
       progressBar:true
     }),
 ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     provideToastr({
-      timeOut: 10000,
+      timeOut: 1000,
       positionClass: 'toast-top-center',
-      preventDuplicates: true,
       progressBar: true
       
     }),

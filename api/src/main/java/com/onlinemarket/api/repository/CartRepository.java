@@ -8,4 +8,6 @@ import com.onlinemarket.api.entity.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
     Optional<Cart> findByUserId(String userId);
+
+    void deleteByUserId(String userId);
 }

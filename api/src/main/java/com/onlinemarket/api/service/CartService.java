@@ -1,20 +1,24 @@
 package com.onlinemarket.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.onlinemarket.api.binding.CartItemRequest;
+import com.onlinemarket.api.controller.exception.InsufficientStockException;
 import com.onlinemarket.api.dto.CartItemDTO;
 import com.onlinemarket.api.entity.Cart;
 import com.onlinemarket.api.entity.CartItem;
 import com.onlinemarket.api.entity.Product;
+import com.onlinemarket.api.entity.Stock;
 import com.onlinemarket.api.entity.User;
 import com.onlinemarket.api.repository.CartItemRepository;
 import com.onlinemarket.api.repository.CartRepository;
 import com.onlinemarket.api.repository.ProductRepository;
 import com.onlinemarket.api.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -31,6 +35,8 @@ public class CartService {
     
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new IllegalArgumentException("Product not found"));
+
+        Stock stock = product.getStock();
     
         Cart cart = cartRepository.findByUserId(request.getUserId())
                 .orElseGet(() -> {
@@ -48,7 +54,10 @@ public class CartService {
                     newItem.setCart(cart);
                     return newItem;
                 });
-    
+
+        if (stock.getQuantity() < request.getQuantity()) {
+            throw new InsufficientStockException("Insufficient stock");
+        }
         cartItem.setQuantity(cartItem.getQuantity() + request.getQuantity());
         cart.getItems().add(cartItem);
         cartRepository.save(cart);
@@ -58,7 +67,10 @@ public class CartService {
     public CartItem updateCartItem(Long id, CartItemRequest request) {
         CartItem cartItem = cartItemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cart item not found"));
-    
+        Stock stock = cartItem.getProduct().getStock();
+        if (stock.getQuantity() < request.getQuantity() + cartItem.getQuantity()) {
+            throw new InsufficientStockException("Insufficient stock");
+        }
         cartItem.setQuantity(request.getQuantity());
     
         cartItemRepository.save(cartItem);
@@ -66,14 +78,20 @@ public class CartService {
     }
 
     public List<CartItemDTO> getCartItems(String userId) {
-        Cart cart = cartRepository.findByUserId(userId).orElseThrow(
-                () -> new IllegalArgumentException("Cart not found"));
-        
+        Optional<Cart> cartOpty = cartRepository.findByUserId(userId)
+                .or(() -> Optional.of(new Cart()));
+        Cart cart = cartOpty.get();
         return cart.getItems().stream().map(this::mapToDTO).toList();
     }
 
+    @Transactional
     public void deleteCartItem(Long id) {
         cartItemRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteCart(String userId) {
+        cartRepository.deleteByUserId(userId);
     }
 
     private CartItemDTO mapToDTO(CartItem item) {

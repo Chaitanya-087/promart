@@ -31,7 +31,7 @@ public class Product implements Serializable {
   @JoinColumn(name = "category_id")
   private Category category;
 
-  @OneToOne(mappedBy = "product",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "product",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JsonIgnore
   private Stock stock;
 

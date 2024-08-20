@@ -9,4 +9,5 @@ import com.onlinemarket.api.entity.User;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
     Optional<Address> findByUser(User user);
+    Optional<Address> findByUserId(String userId);
 }
