@@ -4,6 +4,7 @@ import { Role, User } from "../_models";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { CartService } from "../_services/cart.service";
 import { Router } from "@angular/router";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-navbar",
